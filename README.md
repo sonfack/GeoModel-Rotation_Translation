@@ -29,7 +29,7 @@ If **E** is a square matrix, **U,S** and **V** are the same size as well.
 
 ### Covariance matrix
 The covariance matrix is calculated from points of each set **A** and **B** 
-and their **centroid**
+and their **centroid**  
 **H = ((P_A^1 - Ca)-(P_B^1 - Cb)) + ((P_A^2 - Ca)-(P_B^2 - Cb)) + ...**  
 From this **Familiar Covariance Matrix** we can compute the **[U,S,V] = SVD(H)**  
 Deduct the **Rotation**:  
