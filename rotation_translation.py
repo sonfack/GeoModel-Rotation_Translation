@@ -3,7 +3,7 @@ from scipy.linalg import svd
 
 # Number of points
 
-def enterPoint(N=4):
+def enterPoint(N=3):
     p = np.empty((N,3))
     print("Enter ",N, "point coordinate")
     for i in range(N):
@@ -31,6 +31,8 @@ def USVt_SVD(H):
 
 def main():
 
+
+
     A = enterPoint()
     Ca = createCentroid(A)
 
@@ -43,6 +45,7 @@ def main():
 
     #H= np.matrix([[1, 0, 0, 0, 2],[0, 0, 3, 0, 0],[0, 0, 0, 0, 0],[0, 2, 0, 0, 0]])
     #H = np.array([[1, 2], [3, 4], [5, 6]])
+    #H = np.array([[2, 2], [-1, 1]])
     print(H)
 
     U, S, V = USVt_SVD(H)
@@ -55,12 +58,12 @@ def main():
 
 
     #Rotation
-    #R  = V*U.transpose()
-    #print("Rotation", R)
+    R  = V*U.transpose()
+    print("Rotation", R)
 
     #Translation
-    #T = -1*R*Ca + Cb
-    #print("Transaltion", T)
+    T = -1*R*Ca + Cb
+    print("Transaltion", T)
 
 if __name__ == '__main__':
     main()
