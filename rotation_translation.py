@@ -31,8 +31,6 @@ def USVt_SVD(H):
 
 def main():
 
-    '''
-
     A = enterPoint()
     Ca = createCentroid(A)
 
@@ -42,9 +40,9 @@ def main():
     H = covarianceMatrix(A, Ca, B,Cb)
     print("cov Matrix")
 
-    '''
+
     #H= np.matrix([[1, 0, 0, 0, 2],[0, 0, 3, 0, 0],[0, 0, 0, 0, 0],[0, 2, 0, 0, 0]])
-    H = np.array([[1, 2], [3, 4], [5, 6]])
+    #H = np.array([[1, 2], [3, 4], [5, 6]])
     print(H)
 
     U, S, V = USVt_SVD(H)

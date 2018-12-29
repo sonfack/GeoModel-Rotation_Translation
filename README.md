@@ -25,10 +25,16 @@ Tof calculate the **Optimal Rotation**, we are going to use the **SVD**
 **U, S,V**.  
 **[U,S,V] = SVD(E)**  
 -----> **E = USV^t** where V^t ==  the transpose of **V**.  
-If **E** is a square matrix, **U,S** and **V** are thesame size as well.  
+If **E** is a square matrix, **U,S** and **V** are the same size as well.  
 
 ### Covariance matrix
-**H =**
- 
-## Calculate the *Translation matrix*
+The covariance matrix is calculated from points of each set **A** and **B** 
+and their **centroid**
+**H = ((P_A^1 - Ca)-(P_B^1 - Cb)) + ((P_A^2 - Ca)-(P_B^2 - Cb)) + ...**  
+From this **Familiar Covariance Matrix** we can compute the **[U,S,V] = SVD(H)**  
+Deduct the **Rotation**:  
+**R = Vtranspose(U)**  
 
+## Calculate the *Translation matrix*
+**T = -RCa + Cb**  
+Where **Ca** is the **Centroid of A** and **Cb** is the **Centroid of B** 
