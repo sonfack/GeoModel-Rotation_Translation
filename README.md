@@ -19,6 +19,16 @@ The functin **def createCentroid(M)** is to calculate the centroid of a
 given set of points in the space.
 
 ## Calculate the *Optimal Rotation*
-$$ $$
+Tof calculate the **Optimal Rotation**, we are going to use the **SVD**
+*(Singular Value Decomposition)*  
+**SDV** will decompose a matrix call **E** into three other matrices 
+**U, S,V**.  
+**[U,S,V] = SVD(E)**  
+-----> **E = USV^t** where V^t ==  the transpose of **V**.  
+If **E** is a square matrix, **U,S** and **V** are thesame size as well.  
+
+### Covariance matrix
+**H =**
+ 
 ## Calculate the *Translation matrix*
 

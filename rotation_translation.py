@@ -1,10 +1,10 @@
 import numpy as np
+from scipy.linalg import svd
 
 # Number of points
 
 def enterPoint(N=4):
     p = np.empty((N,3))
-
     print("Enter ",N, "point coordinate")
     for i in range(N):
         print("point ",i+1)
@@ -15,22 +15,54 @@ def enterPoint(N=4):
     return p
 
 def createCentroid(M):
-    sumx = 0
-    sumy = 0
-    sumz = 0
-    row, col = M.shape
+  return np.mean(M, axis=0)
 
+def covarianceMatrix(A,Ca, B, Cb):
+    row, col = A.shape
+    sum = np.zeros(A.shape)
     for i in range(row):
-        sumx = sumx + M[i][0]
-        sumy = sumy + M[i][1]
-        sumz = sumz + M[i][2]
-    return sumx/row, sumy/row, sumz/row
+        Bs = (B[i] - Cb)
+        Bt = Bs.transpose()
+        sum = sum + np.dot((A[i] - Ca), Bt)
+    return sum
 
+def USVt_SVD(H):
+    return svd(H)
 
 def main():
-    A = enterPoint()
-    print(createCentroid(A))
 
+    '''
+
+    A = enterPoint()
+    Ca = createCentroid(A)
+
+    B = enterPoint()
+    Cb = createCentroid(B)
+
+    H = covarianceMatrix(A, Ca, B,Cb)
+    print("cov Matrix")
+
+    '''
+    #H= np.matrix([[1, 0, 0, 0, 2],[0, 0, 3, 0, 0],[0, 0, 0, 0, 0],[0, 2, 0, 0, 0]])
+    H = np.array([[1, 2], [3, 4], [5, 6]])
+    print(H)
+
+    U, S, V = USVt_SVD(H)
+    print("U", U.shape)
+    print(U)
+    print("S", S.shape)
+    print(S)
+    print("V", V.shape)
+    print(V)
+
+
+    #Rotation
+    #R  = V*U.transpose()
+    #print("Rotation", R)
+
+    #Translation
+    #T = -1*R*Ca + Cb
+    #print("Transaltion", T)
 
 if __name__ == '__main__':
     main()
