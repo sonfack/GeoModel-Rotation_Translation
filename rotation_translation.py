@@ -12,55 +12,54 @@ def enterPoint(N=3):
         p[i][1] = input("y :")
         p[i][2] = input("z :")
 
-    return p
+    return np.asmatrix(np.array(p)).transpose()
 
 def createCentroid(M):
-  return np.mean(M, axis=0)
+  return np.mean(M, axis=1)
 
-def covarianceMatrix(A,Ca, B, Cb):
+def covMatrix(A,Ca, B, Cb):
     row, col = A.shape
-    sum = np.zeros(A.shape)
-    for i in range(row):
-        Bs = (B[i] - Cb)
-        Bt = Bs.transpose()
-        sum = sum + np.dot((A[i] - Ca), Bt)
-    return sum
+    H = np.zeros((row, col))
+    for j in range(col):
+        print("=========================================")
+        print((A[:,j] - Ca)*(B[:,j]- Cb).transpose())
+        print("=========================================")
+        H = H + ((A[:,j] - Ca)*(B[:,j]- Cb).transpose())
+    return H
+
 
 def USVt_SVD(H):
     return svd(H)
 
 def main():
-
-
-
     A = enterPoint()
+    print('matrix', A)
     Ca = createCentroid(A)
-
+    print('matrix Ca', Ca)
+    print("\n")
     B = enterPoint()
+    print('matrix', B)
     Cb = createCentroid(B)
-
-    H = covarianceMatrix(A, Ca, B,Cb)
+    print('matrix Cb', Cb)
+    print("\n")
     print("cov Matrix")
-
-
-    #H= np.matrix([[1, 0, 0, 0, 2],[0, 0, 3, 0, 0],[0, 0, 0, 0, 0],[0, 2, 0, 0, 0]])
-    #H = np.array([[1, 2], [3, 4], [5, 6]])
-    #H = np.array([[2, 2], [-1, 1]])
+    H = covMatrix(A, Ca, B,Cb)
     print(H)
-
+    print("\n")
     U, S, V = USVt_SVD(H)
     print("U", U.shape)
     print(U)
+    print("\n")
     print("S", S.shape)
     print(S)
+    print("\n")
     print("V", V.shape)
     print(V)
-
-
+    print("\n")
     #Rotation
     R  = V*U.transpose()
     print("Rotation", R)
-
+    print("\n")
     #Translation
     T = -1*R*Ca + Cb
     print("Transaltion", T)
