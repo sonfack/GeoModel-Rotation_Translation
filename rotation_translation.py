@@ -1,5 +1,8 @@
 import numpy as np
+import math
 from scipy.linalg import svd
+from scipy.spatial import distance
+
 
 # Number of points
 
@@ -27,6 +30,14 @@ def covMatrix(A,Ca, B, Cb):
         H = H + ((A[:,j] - Ca)*(B[:,j]- Cb).transpose())
     return H
 
+def error(T, R, A, B):
+    row, col = A.shape
+    err = 0
+    center = np.zeros((row,1))
+    for j in range(col):
+        V = R*A[:, j] + T - B[:, j]
+        err = err + math.pow(distance.euclidean(center, V), 2)
+    return err
 
 def USVt_SVD(H):
     return svd(H)
@@ -63,6 +74,9 @@ def main():
     #Translation
     T = -1*R*Ca + Cb
     print("Transaltion", T)
-
+    print("\n")
+    #erreur
+    err = error(T, R, A, B)
+    print("Erreur : ", err)
 if __name__ == '__main__':
     main()
